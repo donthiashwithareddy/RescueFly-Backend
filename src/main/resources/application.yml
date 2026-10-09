@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: rescuefly
+
+  datasource:
+    url: ${DB_URL:jdbc:mysql://rescuefly-anurag-1df2.k.aivencloud.com:21912/defaultdb?sslMode=REQUIRED}
+    username: ${DB_USERNAME:avnadmin}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: false
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+
+server:
+  port: ${PORT:8080}
+  error:
+    include-message: never
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+
+  cors:
+    allowed-origins: ${CORS_ORIGINS:https://rescuefly.netlify.app}

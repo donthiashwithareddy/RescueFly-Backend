@@ -1,0 +1,3 @@
+package com.rescuefly.controller;
+import com.rescuefly.dto.CaseDtos.*; import com.rescuefly.service.CaseService; import jakarta.validation.Valid; import org.springframework.security.core.Authentication; import org.springframework.web.bind.annotation.*; import java.util.*;
+@RestController @RequestMapping("/api/cases") public class CaseController{private final CaseService s;public CaseController(CaseService s){this.s=s;}@GetMapping public List<CaseResponse> list(Authentication a){return s.list(a.getName());}@PostMapping public CaseResponse create(Authentication a,@Valid @RequestBody CreateCaseRequest r){return s.create(a.getName(),r);}}

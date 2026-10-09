@@ -1,0 +1,3 @@
+package com.rescuefly.service;
+import com.rescuefly.entity.*; import com.rescuefly.repository.*; import org.springframework.stereotype.Component;
+@Component public class CaseRepositoryAdapter { private final RecoveryCaseRepository repo; private final UserRepository users; public CaseRepositoryAdapter(RecoveryCaseRepository r,UserRepository u){repo=r;users=u;} public RecoveryCase create(String email,String type,String title,String details){var c=new RecoveryCase();c.setCaseType(type);c.setTitle(title);c.setDetails(details);c.setOwner(users.findByEmailIgnoreCase(email).orElseThrow());return repo.save(c);} }

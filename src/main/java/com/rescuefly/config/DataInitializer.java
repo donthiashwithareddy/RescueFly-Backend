@@ -1,0 +1,3 @@
+package com.rescuefly.config;
+import com.rescuefly.entity.Role; import com.rescuefly.entity.User; import com.rescuefly.repository.UserRepository; import org.springframework.boot.CommandLineRunner; import org.springframework.context.annotation.*; import org.springframework.security.crypto.password.PasswordEncoder;
+@Configuration public class DataInitializer{@Bean CommandLineRunner seed(UserRepository users,PasswordEncoder enc){return args->{if(!users.existsByEmailIgnoreCase("demo@rescuefly.app")){User u=new User();u.setName("Demo Operator");u.setEmail("demo@rescuefly.app");u.setPasswordHash(enc.encode("RescueFly@123"));u.setRole(Role.USER);users.save(u);}};}}

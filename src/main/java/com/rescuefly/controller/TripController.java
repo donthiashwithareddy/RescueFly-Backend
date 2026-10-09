@@ -1,0 +1,3 @@
+package com.rescuefly.controller;
+import com.rescuefly.dto.TripDtos.*; import com.rescuefly.service.TripService; import jakarta.validation.Valid; import org.springframework.security.core.Authentication; import org.springframework.web.bind.annotation.*; import java.util.*;
+@RestController @RequestMapping("/api/trips") public class TripController{private final TripService s;public TripController(TripService s){this.s=s;}@GetMapping public List<TripResponse> list(Authentication a){return s.list(a.getName());}@PostMapping public TripResponse create(Authentication a,@Valid @RequestBody CreateTripRequest r){return s.create(a.getName(),r);}@GetMapping("/stats") public Map<String,Object> stats(Authentication a){return s.stats(a.getName());}}
